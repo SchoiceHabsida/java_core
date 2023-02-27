@@ -1,3 +1,4 @@
+
 public class Task_6_2_6 {
      public static class ComplexNumber {
         private double re;
@@ -18,6 +19,7 @@ public class Task_6_2_6 {
         public double getIm() {
             return im;
         }
+
 
      }
 

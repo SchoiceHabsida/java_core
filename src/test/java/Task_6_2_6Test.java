@@ -56,6 +56,15 @@ public class Task_6_2_6Test {
     }
 
     @Test
+    void testHashCodeIsNotUseConstantEqual() {
+        Task_6_2_6.ComplexNumber actual = new Task_6_2_6.ComplexNumber(2.32, 5.612);
+        Task_6_2_6.ComplexNumber compareTo = new Task_6_2_6.ComplexNumber(2.321, 5.612);
+
+        assertFalse(actual.equals(compareTo));
+        assertNotEquals(actual.hashCode(), compareTo.hashCode());
+    }
+
+    @Test
     void testHashCodeIsNotCreatedWithIDE() {
         Task_6_2_6.ComplexNumber complexNumber = new Task_6_2_6.ComplexNumber(2.321, 5.612);
         int hashcode = Objects.hash(complexNumber);
