@@ -8,7 +8,7 @@ import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class Task_6_3_10Test {
+public class Task_6_3_11Test {
 
     private final PrintStream standardOut = System.out;
     private final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -24,21 +24,20 @@ public class Task_6_3_10Test {
     }
     @Test
     void test_methodStud() {
-        Task_6_3_10.JavaStudent stud = new Task_6_3_10.JavaStudent();
-        stud.study();
+        Task_6_3_11.LazyStudent lazyStudent = new Task_6_3_11.LazyStudent();
+        lazyStudent.study();
         String str = outputStream.toString().trim();
-        assertEquals("I'm very busy. I'm taking a Java course.", str);
-
+        assertEquals("I don't study today, I'm lazy.", str);
     }
 
     @Test
     void test_superclass() {
-        Class javaStudent = new Task_6_3_10.JavaStudent().getClass();
+        Class lazyStudent = new Task_6_3_11.LazyStudent().getClass();
 
-        assertEquals("[]", Arrays.toString(javaStudent.getDeclaredFields()));
-        assertEquals("Task_6_3_10$Student", javaStudent.getSuperclass().getName());
-        assertEquals("[public Task_6_3_10$JavaStudent()]", Arrays.toString(javaStudent.getConstructors()));
-        assertEquals("[]", Arrays.toString(javaStudent.getDeclaredMethods()));
+        assertEquals("[]", Arrays.toString(lazyStudent.getDeclaredFields()));
+        assertEquals("Task_6_3_11$Student", lazyStudent.getSuperclass().getName());
+        assertEquals("[public Task_6_3_11$LazyStudent()]", Arrays.toString(lazyStudent.getConstructors()));
+        assertEquals("[public void Task_6_3_11$LazyStudent.study()]", Arrays.toString(lazyStudent.getDeclaredMethods()));
 
     }
 

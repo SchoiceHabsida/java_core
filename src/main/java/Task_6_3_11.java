@@ -1,4 +1,4 @@
-public class Task_6_3_10 {
+public class Task_6_3_11 {
     public static class Student {
         protected final String studying;
         protected Student(String work) {
@@ -13,4 +13,5 @@ public class Task_6_3_10 {
     }
 
     //here your code
+
 }
