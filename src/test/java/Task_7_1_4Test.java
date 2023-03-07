@@ -2,7 +2,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class Task_7_1_4Test1 {
+class Task_7_1_4Test {
 
     @Test
     void testStackTrace() {
