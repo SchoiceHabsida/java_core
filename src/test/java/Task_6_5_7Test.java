@@ -5,44 +5,72 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class Task_6_5_7Test {
-    private Task_6_5_7.AsciiCharSequence array;
 
-    @BeforeEach
-    void setUp() {
-        array = new Task_6_5_7.AsciiCharSequence(new byte[]{'H','a','b','s','i','d','a'});
+    private Task_6_5_7 task_6_5_7 = new Task_6_5_7();
+    private final String[] spamKeywords = {"spam", "bad","malicious"};
+    private final int commentMaxLength = 40;
+    private final TextAnalyzer[] textAnalyzers = {
+            new SpamAnalyzer(spamKeywords),
+            new NegativeTextAnalyzer(),
+            new TooLongTextAnalyzer(commentMaxLength)
+    };
+
+    private final String[] comments = {
+            "This comment is so Loooooooooooooooooooooooooooong.", //TOO_LONG
+            "Very negative comment !!!!=(!!!!;",                   // NEGATIVE_TEXT
+            "Very BAAAAAAAAAAAAAAAAAAAAAAAAD comment with :|;",    // NEGATIVE_TEXT or TOO_LONG
+            "This comment is so bad....",                        // SPAM
+            "The comment is a spam, maybeeeeeeeeeeeeeeeeeeeeee!",  // SPAM or TOO_LONG
+            "Negative bad :( spam.",                               // SPAM or NEGATIVE_TEXT
+            "Very bad, very neg =(, very ..................",
+            "Let's Go With Habsida",
+            "This is very good Comment",
+            "I don't like you :| "
+    };
+
+    @Test
+    void testOk() {
+        assertEquals(Label.OK, task_6_5_7.checkLabels(textAnalyzers, comments[7]));
     }
 
     @Test
-    void testArrayToString() {
-        assertEquals("Habsida", array.toString());
-        assertNotEquals("K-pop", array.toString());
+    void testLongText() {
+        assertEquals(Label.TOO_LONG, task_6_5_7.checkLabels(textAnalyzers, comments[0]));
     }
 
     @Test
-    void testArrayLength() {
-        assertEquals(7, array.length());
-        assertNotEquals(8, array.length());
-        assertNotEquals(3, array.length());
-
-
+    void testNegativeText() {
+        assertEquals(Label.NEGATIVE_TEXT, task_6_5_7.checkLabels(textAnalyzers, comments[1]));
+        assertEquals(Label.NEGATIVE_TEXT, task_6_5_7.checkLabels(textAnalyzers, comments[9]));
     }
 
     @Test
-    void testCharAtIndex() {
-        assertEquals('s', array.charAt(3));
-        assertEquals('a', array.charAt(6));
-        assertEquals('H', array.charAt(0));
-        assertNotEquals('k', array.charAt(0));
-
+    void testNegativeOrTooLongText() {
+        assertEquals(Label.NEGATIVE_TEXT, task_6_5_7.checkLabels(textAnalyzers, comments[2]));
     }
 
     @Test
-    void testSubsequence() {
+    void testSpamText() {
+        assertEquals(Label.SPAM, task_6_5_7.checkLabels(textAnalyzers, comments[3]));
+    }
 
-        assertEquals("sid", (array.subSequence(3,6)).toString());
-        assertEquals("Hab", (array.subSequence(0,3)).toString());
-        assertNotEquals("Kpop", (array.subSequence(3,7)).toString());
+    @Test
+    void testSpamOrTooLongText() {
+        assertEquals(Label.SPAM, task_6_5_7.checkLabels(textAnalyzers, comments[4]));
+    }
 
+    @Test
+    void testSpamOrNegativeText() {
+        assertEquals(Label.SPAM, task_6_5_7.checkLabels(textAnalyzers, comments[5]));
+    }
+
+    @Test
+    void testSpamText2() {
+        assertEquals(Label.SPAM, task_6_5_7.checkLabels(textAnalyzers, comments[4]));
+    }
+
+    @Test
+    void testFalseTests() {
+        assertNotEquals(Label.NEGATIVE_TEXT, task_6_5_7.checkLabels(textAnalyzers, comments[8]));
     }
 }
-
