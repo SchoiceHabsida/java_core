@@ -26,14 +26,14 @@ public class Task_10_2_6Test {
 
     @Test
     void testStreams() {
-        String input = "Мама мыла-мыла-мыла раму!";
+        String input = "Mom washed-washed-washed frame!";
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
         Task_10_2_6.main(null);
         String str = outputStream.toString();
-        assertEquals("мыла\n"
-                + "мама\n"
-                + "раму\n", str);
+        assertEquals("washed\n"
+                + "frame\n"
+                + "mom\n", str);
     }
 
     @Test
