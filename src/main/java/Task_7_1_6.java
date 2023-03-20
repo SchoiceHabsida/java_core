@@ -5,7 +5,7 @@ public class Task_7_1_6 {
 
     }
 
-    public static class Car {
+    public static class Car implements AutoCloseable {
 
     }
 }

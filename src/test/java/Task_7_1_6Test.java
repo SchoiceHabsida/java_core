@@ -52,7 +52,7 @@ class Task_7_1_6Test {
         car.drive();
         car.close();
         String result = outputStream.toString().trim();
-        assertEquals("Shutting down the car...", result);
+        assertEquals("The car started driving." + System.getProperty("line.separator") + "Shutting down the car...", result);
     }
 
     @Test
@@ -60,7 +60,7 @@ class Task_7_1_6Test {
         Task_7_1_6.Car car = new Task_7_1_6.Car();
         car.drive();
         String result = outputStream.toString().trim();
-        assertEquals("", result);
+        assertEquals("The car started driving.", result);
     }
 
     @Test
